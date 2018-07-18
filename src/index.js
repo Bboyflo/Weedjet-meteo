@@ -16,7 +16,7 @@ class WeedjetMeteo extends Component {
   
   render() {
     return (
-      <Weather />
+      <Weather country={this.props.country} city={this.props.city}/>
     );
   }
 }
