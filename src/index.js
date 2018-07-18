@@ -3,20 +3,14 @@ import './index.css';
 import Weather from './Components/weather';
 
 class WeedjetMeteo extends Component {
-  
-  componentDidMount() {
-    this.timer = setInterval(() => {
-      this.props.animate().then(() => this);
-    }, 60000);
-  }
-  
-  componentWillUnmount() {
-    clearInterval(this.timer);
-  }
-  
   render() {
     return (
-      <Weather />
+      <Weather refreshInterval={this.props.refreshInterval}
+               animate={this.props.animate}
+               country={this.props.country}
+               city={this.props.city}
+               appId={this.props.appId}
+      />
     );
   }
 }

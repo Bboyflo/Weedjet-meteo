@@ -5,7 +5,6 @@ import {WeatherCloudyIcon, WeatherRainyIcon, WeatherSnowyIcon, WeatherSunnyIcon,
 class WeatherInfo extends Component {
     constructor(props) {
         super(props);
-        this.state = {data: this.props.data}
         this.renderIcon = this.renderIcon.bind(this)
     }
 
@@ -43,24 +42,24 @@ class WeatherInfo extends Component {
     render() {
         return (
         <div className="weather-info">
-            <div className="weather-overlay" style={{background: this.props.Color + " url(" + this.renderBG(this.state.data["weather"][0]["main"]) + ")", backgroundSize: "cover"}}>
+            <div className="weather-overlay" style={{background: this.props.Color + " url(" + this.renderBG(this.props.data["weather"][0]["main"]) + ")", backgroundSize: "cover"}}>
                 <div className="weather-overlay-info">
                     <div className="weather-overlay-left">
                         <div className="weather-text">
-                            {this.state.data["name"]}
+                            {this.props.data["name"]}
                         </div>
                         <div>
                             <div className="weather-speed">
-                                <span className="windy-icon"><WeatherWindyIcon color="#fff" size={16}/> </span><span style={{fontWeight: "300", fontSize: "1.2em", color: "white"}}>{Math.round(this.state.data["wind"]["speed"])} </span> <span style={{fontWeight: "300", fontSize: "0.8em", color: "white"}}>KMH</span>                            
+                                <span className="windy-icon"><WeatherWindyIcon color="#fff" size={16}/> </span><span style={{fontWeight: "300", fontSize: "1.2em", color: "white"}}>{Math.round(this.props.data["wind"]["speed"])} </span> <span style={{fontWeight: "300", fontSize: "0.8em", color: "white"}}>KMH</span>                            
                             </div>
                             <div className="weather-degrees" style={{fontWeight: "300", fontSize: "1.4em", color: "white"}}>
-                                {Math.round(this.state.data["main"]["temp"]) - 273}°            
+                                {Math.round(this.props.data["main"]["temp"]) - 273}°            
                             </div>
                         </div>
                     </div>
                     <div className="weather-overlay-right">
                         <div className="weather-icon"> 
-                            {this.renderIcon(this.state.data["weather"][0]["main"])}
+                            {this.renderIcon(this.props.data["weather"][0]["main"])}
                         </div>
                     </div>
                 </div>

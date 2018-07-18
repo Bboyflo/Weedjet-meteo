@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import './../index.css';
 import WeatherInfo from './weather-info';
-import axios from "axios"
 
 class Weather extends Component {
   constructor(props) {
@@ -16,14 +15,33 @@ class Weather extends Component {
     this.getData()
   }
 
+  componentDidMount() {
+    this.timer = setInterval(() => {
+      this.props.animate().then(() => this.getData());
+    }, this.props.refreshInterval || 60000);
+  }
+
+  componentWillUnmount() {
+    clearInterval(this.timer);
+  }
+
   getData = () => {
-    const Ville = 'Rennes,fr'
-    axios.get('http://api.openweathermap.org/data/2.5/weather?q=' + Ville + '&appid=e4a67e1414378e8b1666cabd6a2ab112')
-    .then(response => {
-      this.setState({data: response["data"]})
-      let color = this.renderColor()
-      this.setState({color: color, haveLoaded: true})
-    })
+    const city = this.props.city || 'Rennes';
+    const country = this.props.country || 'France';
+    fetch(`http://api.openweathermap.org/data/2.5/weather?q=${city}, ${country}&appid=${this.props.appId}`)
+      .then(response => {
+        if (response.status !== 200) {
+          throw Error(response.statusText);
+        }
+        return response.json()
+      })
+      .then(data => {
+          this.setState({data: data}, () => {
+          let color = this.renderColor()
+          this.setState({color: color, haveLoaded: true})
+        })
+      })
+      .catch(error => console.log(error))
   }
 
   renderColor = () => {
@@ -44,7 +62,7 @@ class Weather extends Component {
       return (
         this.state.haveLoaded ? <div className="Weather">
           <WeatherInfo data={this.state.data} Color={this.state.color}/>
-        </div> : <div className="loader-container"> <div class="lds-dual-ring"></div> </div> 
+        </div> : <div className="loader-container"> <div className="lds-dual-ring"></div> </div>
       );
     }
 }
