@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import './../index.css';
 import WeatherInfo from './weather-info';
-import axios from "axios"
 
 class Weather extends Component {
   constructor(props) {
@@ -18,7 +17,7 @@ class Weather extends Component {
 
   getData = () => {
     const Ville = 'Rennes,fr'
-    axios.get('http://api.openweathermap.org/data/2.5/weather?q=' + Ville + '&appid=e4a67e1414378e8b1666cabd6a2ab112')
+    fetch('http://api.openweathermap.org/data/2.5/weather?q=' + Ville + '&appid=e4a67e1414378e8b1666cabd6a2ab112')
     .then(response => {
       this.setState({data: response["data"]})
       let color = this.renderColor()

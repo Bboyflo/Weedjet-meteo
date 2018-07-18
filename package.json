@@ -4,6 +4,7 @@
   "main": "build/index.js",
   "private": true,
   "dependencies": {
+    "mdi-react": "^4.0.0",
     "react": "^16.4.1"
   },
   "babel": {
@@ -15,6 +16,9 @@
       "transform-react-jsx",
       "transform-class-properties"
     ]
+  },
+  "dependencies": {
+    "mdi-react": "^4.0.0"
   },
   "devDependencies": {
     "babel-cli": "^6.26.0",
