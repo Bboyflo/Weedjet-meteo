@@ -28,7 +28,7 @@ class Weather extends Component {
   getData = () => {
     const city = this.props.city || 'Rennes';
     const country = this.props.country || 'France';
-    fetch(`http://api.openweathermap.org/data/2.5/weather?q=${city}, ${country}&appid=e4a67e1414378e8b1666cabd6a2ab112`)
+    fetch(`http://api.openweathermap.org/data/2.5/weather?q=${city}, ${country}&appid=${this.props.appId}`)
       .then(response => {
         if (response.status !== 200) {
           throw Error(response.statusText);
