@@ -45,7 +45,7 @@ class Weather extends Component {
       return (
         this.state.haveLoaded ? <div className="Weather">
           <WeatherInfo data={this.state.data} Color={this.state.color}/>
-        </div> : <div className="loader-container"> <div class="lds-dual-ring"></div> </div> 
+        </div> : <div className="loader-container"> <div className="lds-dual-ring"></div> </div>
       );
     }
 }
