@@ -18,10 +18,12 @@ class Weather extends Component {
   getData = () => {
     const Ville = 'Rennes,fr'
     fetch('http://api.openweathermap.org/data/2.5/weather?q=' + Ville + '&appid=e4a67e1414378e8b1666cabd6a2ab112')
-    .then(response => {
-      this.setState({data: response["data"]})
-      let color = this.renderColor()
-      this.setState({color: color, haveLoaded: true})
+      .then(response => response.json())
+    .then(data => {
+      this.setState({data: data}, () => {
+        let color = this.renderColor()
+        this.setState({color: color, haveLoaded: true})
+      })
     })
   }
 
