@@ -15,6 +15,16 @@ class Weather extends Component {
     this.getData()
   }
 
+  componentDidMount() {
+    this.timer = setInterval(() => {
+      this.props.animate().then(() => this.getData());
+    }, this.props.refreshInterval || 60000);
+  }
+
+  componentWillUnmount() {
+    clearInterval(this.timer);
+  }
+
   getData = () => {
     const city = this.props.city || 'Rennes';
     const country = this.props.country || 'France';
