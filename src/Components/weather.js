@@ -19,13 +19,19 @@ class Weather extends Component {
     const city = this.props.city || 'Rennes';
     const country = this.props.country || 'France';
     fetch(`http://api.openweathermap.org/data/2.5/weather?q=${city}, ${country}&appid=e4a67e1414378e8b1666cabd6a2ab112`)
-      .then(response => response.json())
-      .then(data => {
-        this.setState({data: data}, () => {
-        let color = this.renderColor()
-        this.setState({color: color, haveLoaded: true})
+      .then(response => {
+        if (response.status !== 200) {
+          throw Error(response.statusText);
+        }
+        return response.json()
       })
-    })
+      .then(data => {
+          this.setState({data: data}, () => {
+          let color = this.renderColor()
+          this.setState({color: color, haveLoaded: true})
+        })
+      })
+      .catch(error => console.log(error))
   }
 
   renderColor = () => {
