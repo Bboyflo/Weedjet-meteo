@@ -7,7 +7,7 @@ class WeedjetMeteo extends Component {
   componentDidMount() {
     this.timer = setInterval(() => {
       this.props.animate().then(() => this);
-    }, 60000);
+    }, this.props.refreshInterval || 60000);
   }
   
   componentWillUnmount() {
